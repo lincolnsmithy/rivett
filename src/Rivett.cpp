@@ -3,13 +3,13 @@
 /******************************************************/
 
 #include "Particle.h"
-#line 1 "/Users/john/Rivett/src/Rivett.ino"
+#line 1 "/Users/johnraymond/particle/rivett/src/Rivett.ino"
 #include <Wire.h>
 
 void setup();
 void loop();
 void tach_interrupt();
-#line 3 "/Users/john/Rivett/src/Rivett.ino"
+#line 3 "/Users/johnraymond/particle/rivett/src/Rivett.ino"
 int buttonPin = D0;         // the number of the input pin
 int ledPin = D1;       // the number of the output pin
 
@@ -72,11 +72,13 @@ void loop()
     if (revCount > 0)
     {
       rpm = 60000000 / (accumulator>>3);
+      Serial.printlnf("RPM: %d",rpm);
+      Particle.publish("rpm", String(rpm));
     }
     //Particle.publish("rpm",rpm);
-    Serial.print("RPM: ");
-    Serial.println(rpm);
-    Particle.publish("rpm");
+    //Serial.print("RPM: ");
+    //Serial.println(rpm);
+    //Particle.publish("rpm", String(rpm));
     //matrix.println(rpm);
     //matrix.writeDisplay();
     
@@ -95,8 +97,8 @@ if (reading == HIGH  && previous == LOW && (millis() - mytime) > debounce) {
   //Serial.println(mytime);
   //Serial.println(millis() - mytime);
   //Serial.println(reading);
-  Serial.println(count);
-  Particle.publish("count");
+  Serial.printlnf("COUNT: %d", count);
+  Particle.publish("count",String(count));
   if (state == HIGH)
   {
     count = count + 1;

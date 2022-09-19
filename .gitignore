@@ -1,1 +1,10 @@
-*.cpp
+*.bin
+*.dfu
+*.map
+*.hex
+*.lst
+*.o
+*.d
+*.no_crc
+*.elf
+*.crc_block
